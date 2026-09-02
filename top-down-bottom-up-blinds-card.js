@@ -25,6 +25,8 @@ class TopDownBottomUpBlindsCard extends HTMLElement {
       <style>
         :host {
           display: block;
+          box-sizing: border-box;
+          overflow: hidden;
           background: var(--ha-card-background, var(--card-background-color, white));
           border-radius: var(--ha-card-border-radius, 12px);
           box-shadow: var(--ha-card-box-shadow, 0 2px 4px rgba(0,0,0,0.1));
@@ -32,21 +34,36 @@ class TopDownBottomUpBlindsCard extends HTMLElement {
           font-family: var(--paper-font-body1_-_font-family);
         }
 
+        *, *::before, *::after {
+          box-sizing: border-box;
+        }
+
         .card-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
+          gap: 8px;
           margin-bottom: 16px;
           font-size: 1.2em;
           font-weight: 500;
           color: var(--primary-text-color);
         }
 
+        .card-header span:first-child {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          min-width: 0;
+        }
+
         .entity-status {
           font-size: 0.8em;
           color: var(--secondary-text-color);
           display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-end;
           gap: 8px;
+          flex-shrink: 0;
         }
 
         .entity-badge {
@@ -69,6 +86,7 @@ class TopDownBottomUpBlindsCard extends HTMLElement {
           display: flex;
           align-items: center;
           gap: 20px;
+          min-width: 0;
         }
 
         .blinds-visual {
@@ -80,12 +98,14 @@ class TopDownBottomUpBlindsCard extends HTMLElement {
           display: flex;
           flex-direction: column;
           gap: 16px;
+          min-width: 0;
         }
 
         .control-group {
           display: flex;
           align-items: center;
           gap: 12px;
+          min-width: 0;
         }
 
         .control-label {
@@ -95,6 +115,7 @@ class TopDownBottomUpBlindsCard extends HTMLElement {
           display: flex;
           align-items: center;
           gap: 4px;
+          flex-shrink: 0;
         }
 
         .entity-indicator {
@@ -180,6 +201,12 @@ class TopDownBottomUpBlindsCard extends HTMLElement {
         canvas {
           border-radius: 8px;
           box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 600px) {
+          .blinds-visual {
+            display: none;
+          }
         }
 
         .error {
